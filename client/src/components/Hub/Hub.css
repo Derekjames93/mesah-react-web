@@ -31,8 +31,8 @@
     background: #000001;
 }
 .lower-container{
-    min-height: 280px;
-    background:rgb(104, 101, 101);
+    min-height: 300px;
+    background:rgb(232, 201, 201);
     padding: 20px;
     padding-top: 40px;
     text-align: center;
@@ -41,10 +41,11 @@
     box-sizing: border-box;
     line-height: .6;
     font-weight: lighter;
+    padding-top: 50px;
 }
 .lower-container h4{
-    color: #0f031c;
-    opacity: .6;
+    color: #f71909;
+    opacity: 2;
     font-weight: bold;
 }
 .lower-container p{
@@ -83,12 +84,13 @@
     height: 160px;
     border-radius: 50%; 
     padding: 5px;
-    transform: translate(100px,100px);
+    transform: translate(120px,100px);
 }
 .image-container img{
     width: 150px;
     height: 150px;
     border-radius: 50%; 
+    
 }
 
 .main-body{
@@ -99,6 +101,12 @@
     background-color: white;
     justify-content: flex-end;
     display: flex;
+}
+
+.hr-hub{
+    margin-top: 20px;
+    width: 100%;
+    background-color: #000001;
 }
 
 .bio{

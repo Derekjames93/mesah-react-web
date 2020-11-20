@@ -131,7 +131,9 @@ export default function NavbarPage() {
                             <div className="lower-container"> 
                                 <div>
                                     <h3>{user.name}</h3>
-                                    <h4>{user.jobTitle}</h4>
+                                    <hr className="hr-hub"></hr>
+                                    <h4>Job Title: {user.jobTitle}</h4>
+                                    <hr className="hr-hub"></hr>
                                 </div>
                                 <div className="bio-text">
                                     <p> {user.bio}</p>
