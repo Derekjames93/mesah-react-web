@@ -33,7 +33,7 @@ app.use(
     }))
 
     
-//middleware
+
 // app.use((req,res, next)=>{
 //     console.log('====USER=====')
 //     console.log(req.session.user)
