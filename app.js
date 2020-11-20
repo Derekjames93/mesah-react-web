@@ -32,9 +32,7 @@ app.use(
       store: store,
     }))
 
-    app.get('/', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-      });
+    
 //middleware
 // app.use((req,res, next)=>{
 //     console.log('====USER=====')
@@ -60,5 +58,8 @@ app.use('/api/users', usersRouter);
 app.use('/api/login', loginRouter)
 //TODO DOUBLE CHECK
 app.use('/api/hub', hubRouter )
+app.get('/', function (req, res) {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 
 module.exports = app;
