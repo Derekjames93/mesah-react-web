@@ -1,0 +1,138 @@
+.hub-html{
+    margin: 0px;
+    padding: 0px;
+    background: #f1f1f1;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    height: 100vh;
+}
+.breadcrumb{
+    justify-content: center;
+    background-color: silver;
+}
+
+.card-container{
+    width: 400px;
+    height: auto; 
+    background: #fff;
+    border-radius:  6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 1px 10px 1px #000;
+    overflow: hidden;
+    display: inline-block;
+    margin-top: 90px;
+}
+
+.upper-container{
+    height: 200px;
+    background: #000001;
+}
+.lower-container{
+    min-height: 280px;
+    background:rgb(104, 101, 101);
+    padding: 20px;
+    padding-top: 40px;
+    text-align: center;
+}
+.lower-container h3{
+    box-sizing: border-box;
+    line-height: .6;
+    font-weight: lighter;
+}
+.lower-container h4{
+    color: #0f031c;
+    opacity: .6;
+    font-weight: bold;
+}
+.lower-container p{
+    font-size: 16px;
+    color: rgb(11, 2, 2);
+    margin-bottom: 30px;
+
+}
+
+.bio-text{
+    max-width: 100%;
+}
+
+.lower-container .btn{
+    padding: 12px 20px;
+    background: #9a200a;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all .3s ease-in;
+    margin-top: 50px;
+}
+.lower-container .btn:hover{
+    background: transparent;
+    color: #9a200a;
+    border: 2px solid #9a200a;
+}
+ 
+
+.image-container{
+    background: white;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%; 
+    padding: 5px;
+    transform: translate(100px,100px);
+}
+.image-container img{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%; 
+}
+
+.main-body{
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-left: 70vw;
+    margin-bottom: 50px;
+    background-color: white;
+    justify-content: flex-end;
+    display: flex;
+}
+
+.bio{
+    margin-left: 110px;
+}
+.hub-profile{
+    width: 30vw;
+    padding: 50px;
+}
+
+.hub-body{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.hub-CardImage{
+    height: 20vh;
+}
+
+
+.col{
+    color: white;
+    font-size: 30px;
+}
+
+.jumbotron{
+    background-color:silver;
+}
+
+.img-responsive {
+    height: auto;
+    width: auto;
+    max-height: 72px;
+    max-width: 250px;
+    ;
+}
