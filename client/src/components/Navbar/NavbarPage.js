@@ -80,11 +80,11 @@ export default function NavbarPage() {
                                 About Us
                             </Link>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item" >
                             <Link to='/contact' className='nav-links'>
                                 Contact Us
                             </Link>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <Link to='/register' className='nav-links' onClick={closeMobileMenu}>
                                 Sign Up
