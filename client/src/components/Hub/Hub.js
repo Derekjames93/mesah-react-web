@@ -15,12 +15,17 @@ import { useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../redux/action/profile';
 import BioForm from './BioForm';
 import { Form } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 
 export default function NavbarPage() {
     const [click, setClick] = useState(false); //This is the useState
     const [button, setButton] = useState(true);
     const [bio, setBio] = useState('')
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
     const dispatch = useDispatch()
     const history = useHistory()
     const user = useSelector(state => state.user.profile)
@@ -82,10 +87,10 @@ export default function NavbarPage() {
                 'Content-type': 'application/json'
             }
         })
-        .then(res =>res.json())
-        .then(data => {
-            dispatch(ActionCreators.login(data))
-        })
+            .then(res => res.json())
+            .then(data => {
+                dispatch(ActionCreators.login(data))
+            })
     }
 
     window.addEventListener('resize', showButton)
@@ -93,71 +98,84 @@ export default function NavbarPage() {
         <>
             {user ? (
                 <>
-                <div className="hub-html">
+                    <div className="hub-html">
 
-                
-                    <nav className="navbar">
-                        <div className="navbar-container">
-                            <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
-                                <span> Mesah Comm Inc. </span>
-                                <img src={logo} alt="logo" className="img-responsive"></img>
-                            </Link>
-                            <div className="menu-icon" onClick={handleClick}>
-                                <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+
+                        <nav className="navbar">
+                            <div className="navbar-container">
+                                <Link to="/" className="navbar-logo" onClick={closeMobileMenu}>
+                                    <span> Mesah Comm Inc. </span>
+                                    <img src={logo} alt="logo" className="img-responsive"></img>
+                                </Link>
+                                <div className="menu-icon" onClick={handleClick}>
+                                    <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
+                                </div>
+                                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+
+                                </ul>
+                                <Link to='/login' onClick={closeMobileMenu}>
+                                    {button && <Button buttonStyle='btn--outline' type="submit" onClick={handleLogout}>LOGOUT</Button>}
+                                </Link>
                             </div>
-                            <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                        </nav>
 
-                            </ul>
-                            <Link to='/login' onClick={closeMobileMenu}>
-                                {button && <Button buttonStyle='btn--outline' type="submit" onClick={handleLogout}>LOGOUT</Button>}
-                            </Link>
-                        </div>
-                    </nav>
-
-                    <Breadcrumb>
-                        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                        <Breadcrumb.Item href="">
-                            Calendar
+                        <Breadcrumb>
+                            <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+                            <Breadcrumb.Item href="">
+                                Calendar
                 </Breadcrumb.Item>
-                        <Breadcrumb.Item active>Email</Breadcrumb.Item>
-                    </Breadcrumb>
-                    <Container>
-                        <div className="card-container">
-                            <div className="upper-container">
-                                <div className="image-container">
-                                    <img src={user.profileImage} />
+                            <Breadcrumb.Item active>Email</Breadcrumb.Item>
+                        </Breadcrumb>
+                        <Container>
+                            <div className="card-container">
+                                <div className="upper-container">
+                                    <div className="image-container">
+                                        <img src={user.profileImage} />
+                                    </div>
                                 </div>
+                                <div className="lower-container">
+                                    <div>
+                                        <h3>{user.name}</h3>
+                                        <hr className="hr-hub"></hr>
+                                        <h4>Job Title: {user.jobTitle}</h4>
+                                        <hr className="hr-hub"></hr>
+                                    </div>
+                                    <div className="bio-text">
+                                        <p> {user.bio}</p>
+                                    </div>
+                                    <div>
+                                    <Button variant="primary" onClick={handleShow}>
+                                    Click to Add Bio
+                                </Button>
+
+                                <Modal show={show} onHide={handleClose}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Update Bio!</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body><Form onSubmit={handleBio}>
+                                <Form.Group controlId="bio">
+                                    <Form.Label>Update Bio</Form.Label>
+                                    <Form.Control label="bio" name="bio" type="textArea" value={bio} onChange={(e) => { setBio(e.target.value) }}></Form.Control>
+                                </Form.Group>
+                                <Button variant="primary" type="submit"> Submit</Button>
+                            </Form></Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={handleClose}>
+                                            Close
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                                    </div>
+
+
+                                </div>
+
                             </div>
-                            <div className="lower-container"> 
-                                <div>
-                                    <h3>{user.name}</h3>
-                                    <hr className="hr-hub"></hr>
-                                    <h4>Job Title: {user.jobTitle}</h4>
-                                    <hr className="hr-hub"></hr>
-                                </div>
-                                <div className="bio-text">
-                                    <p> {user.bio}</p>
-                                </div>
-                                <div>
-                                    <a href="#" className="btn">View Profile</a>
-                                </div>
+                            <>
+                            </>
+                        </Container>
 
-
-                            </div>
-
-                        </div>
-                        <Form onSubmit={handleBio}>
-                            <Form.Group controlId="bio">
-                                <Form.Label>Update Bio</Form.Label>
-                                <Form.Control label="bio" name="bio" type="textArea" value={bio} onChange={(e) => {setBio(e.target.value)}}></Form.Control>
-                            </Form.Group>
-                            <Button variant="primary" type="submit"> Submit</Button>
-                        </Form>
-                        
-                    
-                    </Container>
-
-                    <Footer />
+                        <Footer />
                     </div>
                 </>
             ) : (
