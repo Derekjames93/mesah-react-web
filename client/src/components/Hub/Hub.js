@@ -148,7 +148,7 @@ export default function NavbarPage() {
                                     Click to Add Bio
                                 </Button>
 
-                                <Modal show={show} onHide={handleClose}>
+                                <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                                     <Modal.Header closeButton>
                                         <Modal.Title>Update Bio!</Modal.Title>
                                     </Modal.Header>

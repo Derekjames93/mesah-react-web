@@ -90,9 +90,15 @@ export default function NavbarPage() {
                                 Sign Up
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to='/login' className='nav-links' onClick={closeMobileMenu}>
+                                Employees
+                            </Link>
+                        </li>
                     </ul>
                     {user ? (
                         <>
+                        
                         <li className="nav-item">
                         <Link to='/hub' className="nav-links"  onClick={closeMobileMenu}>
                         {button && <Button buttonStyle='btn--outline'>Main Hub</Button>}
