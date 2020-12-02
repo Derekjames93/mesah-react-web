@@ -28,7 +28,7 @@ export default function Register(props) {
         formData.append('jobTitle',jobTitle)
         formData.append('profileImage',profileImage)
         
-        
+        console.log(profileImage)
         fetch('/api/users', {
             method: 'POST',
             body:formData,

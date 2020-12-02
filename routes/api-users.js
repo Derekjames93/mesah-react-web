@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req,file,cb) => {
     
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/svg'){
         // accept a file
         console.log('file accepted')
         cb(null, true)
@@ -87,12 +87,6 @@ router.get('/current', checkAuth, (req,res) => {
 //Create user
 router.post('/',upload.single('profileImage'), (req,res,) => {
     console.log(req.file);
-    
-    if(!req.file.path){
-        res.status(404).json({
-            error: 'Please upload file'
-        })
-    }
     if(!req.body || !req.body.email || !req.body.name || !req.body.password || !req.body.jobTitle){
         res.status(400).json({
             error: ' Please complete all required fields'
@@ -106,7 +100,7 @@ router.post('/',upload.single('profileImage'), (req,res,) => {
 
         models.User.create({
             email: email,
-            profileImage: "/" + req.file.path,
+            profileImage: req.file && req.file.path ? req.file.path : '/uploads/2020-12-01T13:30:15.072Zdownload.png',
             name: name,
             jobTitle: jobTitle,
             password: hash
@@ -117,4 +111,42 @@ router.post('/',upload.single('profileImage'), (req,res,) => {
     })
 
 })
+
+// update profile Info
+router.patch('/edit', checkAuth, (req,res) =>{
+    console.log(req.session.user.id)
+    const updateObject = {}
+    if(!req.body && !req.body.email && !req.body.profileImage && !req.body.name && !req.body.jobTitle){
+        res.status(400).json({
+            error: 'Please pick a field to change'
+        })
+        return;
+    }
+
+    const { email, name, jobTitle, profileImage } = req.body
+    const params = { email, name, jobTitle, profileImage}
+    Object.keys(params).forEach(key => {params[key] ? updateObject[key] = params[key] : ''})
+    models.User.update(updateObject, {
+        where: {
+            id: req.session.user.id
+        }
+    })
+        .then((updated) => {
+            updated && updated[0] > 0 ?
+                res.status(202).json({
+                    success: 'profile updated'
+                })
+            :
+                res.status(404).json({
+                    error: 'Profile not found'
+                })
+        })
+        .catch((e) => {
+            res.status(500).json({
+                error: 'A database error has occured'
+            })
+        })
+})
+
+
 module.exports = router;

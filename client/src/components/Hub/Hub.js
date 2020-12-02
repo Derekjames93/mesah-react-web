@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Breadcrumb, Card, Container } from 'react-bootstrap';
+import { Accordion, Breadcrumb, Card, Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom'
 import Footer from '../Footer/Footer'
@@ -16,13 +16,22 @@ import { ActionCreators } from '../../redux/action/profile';
 import BioForm from './BioForm';
 import { Form } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
+import Equipment from '../Equipment/Equipment';
+
+
 
 
 export default function NavbarPage() {
     const [click, setClick] = useState(false); //This is the useState
     const [button, setButton] = useState(true);
     const [bio, setBio] = useState('')
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [jobTitle, setJobTitle] = useState('')
+    const [profileImage, setProfileImage] = useState('')
+
     const [show, setShow] = useState(false);
+    const [equipments, setEquipment] = useState([])
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
@@ -46,6 +55,17 @@ export default function NavbarPage() {
     useEffect(() => {
         showButton()
     }, [])
+
+    useEffect(() => {
+        fetch('api/equipment')
+        .then(res => res.json())
+        .then((data) =>{
+            console.log(data)
+            setEquipment(data)
+        })
+    },[])
+
+
     //todo fix UseEffect
 
 
@@ -93,13 +113,33 @@ export default function NavbarPage() {
             })
     }
 
+    const handleUpdateProfile = (e) => {
+        e.preventDefault()
+        fetch('api/users/edit', {
+            method: 'PATCH',
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                jobTitle: jobTitle
+            }),
+            headers: {
+                Accept: "application/json",
+                'Content-type': 'application/json'
+            }
+        })
+            .then(res => res.json())
+            .then(data => {
+                dispatch(ActionCreators.login(data))
+            })
+    }
+
     window.addEventListener('resize', showButton)
     return (
         <>
             {user ? (
                 <>
                     <div className="hub-html">
-
+                    
 
                         <nav className="navbar">
                             <div className="navbar-container">
@@ -118,15 +158,21 @@ export default function NavbarPage() {
                                 </Link>
                             </div>
                         </nav>
-
+                        
                         <Breadcrumb>
                             <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-                            <Breadcrumb.Item href="">
-                                Calendar
-                </Breadcrumb.Item>
+                            <Breadcrumb.Item href="/equipment">
+                                Equipment
+                            </Breadcrumb.Item>
                             <Breadcrumb.Item active>Email</Breadcrumb.Item>
                         </Breadcrumb>
+                        <div className="equipment-list">
+                        <Equipment />
+
+                        </div>
                         <Container>
+
+                            
                             <div className="card-container">
                                 <div className="upper-container">
                                     <div className="image-container">
@@ -146,7 +192,7 @@ export default function NavbarPage() {
                                     <div>
                                     <Button variant="primary" onClick={handleShow}>
                                     Click to Add Bio
-                                </Button>
+                                    </Button>
 
                                 <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                                     <Modal.Header closeButton>

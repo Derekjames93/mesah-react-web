@@ -9,6 +9,7 @@ import Login from './components/Login/Login';
 import Hub from './components/Hub/Hub';
 import { ActionCreators } from './redux/action/profile'
 import { useDispatch } from 'react-redux'
+import Equipment from './components/Equipment/Equipment';
 
 
 function App() {
@@ -37,12 +38,10 @@ function App() {
         <Route  path="/about" component={About} />
         <Route path="/register" component={Register}/>
         <Route path="/login" component={Login} />
-        <Route path="/hub" component={Hub} />
+        <Route exact path="/hub" component={Hub} />
+        <Route exact path="/equipment" component={Equipment} />
       </Switch>
-      <Route>
-      <Redirect to="/"/>
-
-      </Route>
+    
 
 
     
