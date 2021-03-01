@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, Breadcrumb, Card, Container } from 'react-bootstrap';
+import {  Breadcrumb, Container } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom'
 import Footer from '../Footer/Footer'
 import logo from '../Mesah Logo 1 v2.png';
 import '../Navbar.css'
 import './Hub.css'
-import test from '../Contact/test.jpeg'
-import { Image } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { Jumbotron } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux'
 import { ActionCreators } from '../../redux/action/profile';
-import BioForm from './BioForm';
+
 import { Form } from 'react-bootstrap';
 import { Modal } from 'react-bootstrap';
-import Equipment from '../Equipment/Equipment';
+import EquipmentList from '../Equipment/EquipmentList';
 
 
 
@@ -28,7 +23,6 @@ export default function NavbarPage() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [jobTitle, setJobTitle] = useState('')
-    const [profileImage, setProfileImage] = useState('')
 
     const [show, setShow] = useState(false);
     const [equipments, setEquipment] = useState([])
@@ -166,17 +160,13 @@ export default function NavbarPage() {
                             </Breadcrumb.Item>
                             <Breadcrumb.Item active>Email</Breadcrumb.Item>
                         </Breadcrumb>
-                        <div className="equipment-list">
-                        <Equipment />
-
-                        </div>
                         <Container>
 
-                            
+                            <EquipmentList />
                             <div className="card-container">
                                 <div className="upper-container">
                                     <div className="image-container">
-                                        <img src={user.profileImage} />
+                                        <img src={user.profileImage} alt="profile"/>
                                     </div>
                                 </div>
                                 <div className="lower-container">

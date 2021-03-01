@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Home from './components/Home';
 import 'react-bootstrap'
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
 import About from './components/Contact/About';
 import Register from './components/Register/Register';

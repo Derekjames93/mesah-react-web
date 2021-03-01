@@ -139,7 +139,7 @@ module.exports = {
       createdAt: new Date,
       updatedAt: new Date
     },{
-      name: 'Manometer',
+      name: 'Shortridge Manometer',
       model: 'ADM-870',
       serial:'M02368', 
       calibration: '03/20/2018',

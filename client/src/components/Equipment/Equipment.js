@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { Accordion, Card, Button, Modal, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
+import {  Form } from 'react-bootstrap'
 import NavbarPage from '../Navbar/NavbarPage';
+import EquipmentList from './EquipmentList';
 
 export default function Equipment() {
     const [equipments, setEquipment] = useState([])
-    const [show, setShow] = useState(false);
+    // const [show, setShow] = useState(false);
     const [name, setName] = useState('')
     const [model, setModel] = useState('')
     const [serial, setSerial] = useState('')
@@ -12,8 +13,8 @@ export default function Equipment() {
     const [due, setDue] = useState('')
     const [owner, setOwner] = useState('')
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     const handleFormSubmit = (e) => {
         fetch('api/equipment', {
@@ -54,59 +55,26 @@ export default function Equipment() {
 
     return (
         <>
+        <NavbarPage />
         <div className="equipment-register">
-            <form className="equipment-form" onSubmit={handleFormSubmit}>
-                <label>Equipment name</label>
-                <input value={name} onChange={(e) => {setName(e.target.value)}}></input>
-                <label>Equipment model</label>
-                <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
-                <label>Equipment serial</label>
-                <input value={serial} onChange={(e) => {setSerial(e.target.value)}}></input>
-                <label>Equipment calibration</label>
-                <input value={calibration} onChange={(e) => {setCalibration(e.target.value)}}></input>
-                <label>Equipment due date</label>
-                <input value={due} onChange={(e) => {setDue(e.target.value)}}></input>
-                <label>Equipment owner</label>
-                <input value={owner} onChange={(e) => {setOwner(e.target.value)}}></input>
+            <Form onSubmit={handleFormSubmit}>
+                <Form.Label>Equipment name</Form.Label>
+                <Form.Control value={name} onChange={(e) => {setName(e.target.value)}} placeholder="Equipment Name"></Form.Control>
+                <Form.Label>Equipment model</Form.Label>
+                <Form.Control value={model} onChange={(e) => {setModel(e.target.value)}} placeholder="Model Number"></Form.Control>
+                <Form.Label>Equipment serial</Form.Label>
+                <Form.Control value={serial} onChange={(e) => {setSerial(e.target.value)}} placeholder="Serial Number"></Form.Control>
+                <Form.Label>Equipment calibration</Form.Label>
+                <Form.Control value={calibration} type="date" onChange={(e) => {setCalibration(e.target.value)}} placeholder="Calibration Date"></Form.Control>
+                <Form.Label>Equipment due date</Form.Label>
+                <Form.Control value={due} type="date" onChange={(e) => {setDue(e.target.value)}} placeholder="Due Date"></Form.Control>
+                <Form.Label>Equipment owner</Form.Label>
+                <Form.Control value={owner} onChange={(e) => {setOwner(e.target.value)}} placeholder="Equipment Owner"></Form.Control>
                 <button type='submit'>Submit</button>
-            </form>
+            </Form>
         </div>
-            <Button variant="primary" onClick={handleShow} size="lg" block>
-                Equipment List
-            </Button>
-
-            <Modal show={show} onHide={handleClose} size="xl">
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>{equipments.map((equipment) => {
-                console.log(equipment)
-                return (
-                    <>
-                        <Container>
-                            <ListGroup>
-                                <ListGroupItem>{equipment.owner}</ListGroupItem>
-                                <ListGroupItem>{equipment.name}</ListGroupItem>
-                                <ListGroupItem>{equipment.model}</ListGroupItem>
-                                <ListGroupItem>{equipment.serial}</ListGroupItem>
-                                <ListGroupItem>{equipment.calibration}</ListGroupItem>
-                                <ListGroupItem>{equipment.due}</ListGroupItem>
-                            </ListGroup>
-                        </Container>
-                    </>
-                )
-            })
-            }</Modal.Body>
-            
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
-          </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
-          </Button>
-                </Modal.Footer>
-            </Modal>
+        <br></br>
+            <EquipmentList />
         </>
 
         

@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { Carousel, Image, Container, Navbar } from 'react-bootstrap'
-import test from './test.jpeg'
+import React from 'react';
+import { Container, Navbar } from 'react-bootstrap'
 import profilePic from './newimg.png'
 import cityPic from './houston.jpg'
 import './Contact.css'
@@ -11,11 +10,11 @@ import NavbarPage from '../Navbar/NavbarPage';
 export default function Contact() {
 
     //-----Carousel Control
-    const [index, setIndex] = useState(0);
+    // const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
-        setIndex(selectedIndex);
-    };
+    // const handleSelect = (selectedIndex, e) => {
+    //     setIndex(selectedIndex);
+    // };
 
     return (
         <>
