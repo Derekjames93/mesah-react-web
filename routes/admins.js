@@ -40,9 +40,9 @@ const upload = multer({
 
 //*GET all users
 router.get('/', (req,res) => {
-    models.User.findAll()
-    .then((user) => {
-        res.json(user)
+    models.Admins.findAll()
+    .then((admin) => {
+        res.json(admin)
     })
 })
 
