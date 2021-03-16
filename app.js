@@ -14,6 +14,7 @@ const loginRouter = require('./routes/login')
 const equipmentRouter = require('./routes/equipment')
 //todo CHECK HUB ROUTE PAGE TO MAKE SURE IT GETS USER LOGIN TO FETCH USERNAME TO HUB JS FRONT END
 const hubRouter = require('./routes/hubroute')
+const adminRouter = require('./routes/admins')
 
 var app = express();
 
@@ -34,7 +35,16 @@ app.use(
       store: store,
     }))
 
-    
+function isAdmin(req,res,next){
+    let isAdmin = true //check in database
+    if (isAdmin){
+      next()
+    }else{
+      res.status(403).json({
+        error:'Not an Admin'
+      })
+    }
+}
 
 // app.use((req,res, next)=>{
 //     console.log('====USER=====')
@@ -47,6 +57,7 @@ app.use(
 // Routes
 
 app.use('/api/users', usersRouter);
+app.use('/api/admins', adminRouter);
 app.use('/api/login', loginRouter)
 /app.use('/api/equipment', equipmentRouter)
 //TODO DOUBLE CHECK

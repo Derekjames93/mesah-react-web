@@ -27,6 +27,13 @@ module.exports = {
       jobTitle:{
         type: Sequelize.STRING
       },
+      AdminId:{
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Admins',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

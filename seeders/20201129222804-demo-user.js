@@ -1,5 +1,7 @@
 'use strict';
 
+var faker = require('faker')
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     /**
@@ -11,6 +13,9 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+
+
   await queryInterface.bulkInsert('Users', [
     {
       name: 'Demo',
